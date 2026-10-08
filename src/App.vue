@@ -4,23 +4,19 @@ import { IDIOMAS, TODAS_LAS_ENTRADAS } from './lib/idiomas.js'
 import { mensaje, guardado } from './lib/util.js'
 import VistaDiccionario from './components/VistaDiccionario.vue'
 import VistaLenguas from './components/VistaLenguas.vue'
-import VistaForja from './components/VistaForja.vue'
 
 const PESTANAS = [
   { id: 'diccionario', nombre: 'Diccionario' },
-  { id: 'lenguas', nombre: 'Lenguas' },
-  { id: 'forja', nombre: 'Forja' }
+  { id: 'lenguas', nombre: 'Lenguas' }
 ]
-const vista = ref(guardado.leer('vista', 'diccionario'))
+const vistaGuardada = guardado.leer('vista', 'diccionario')
+const vista = ref(PESTANAS.some(p => p.id === vistaGuardada) ? vistaGuardada : 'diccionario')
 const idiomaLenguas = ref(IDIOMAS[0]?.id ?? '')
-const idiomaForja = ref(IDIOMAS[0]?.id ?? '')
-const textoForja = ref('')
 const soloIdioma = ref('')
 
 function ir(v) { vista.value = v; guardado.escribir('vista', v) }
 function verIdioma(id) { idiomaLenguas.value = id; ir('lenguas') }
 function verEnDiccionario(id) { soloIdioma.value = id; ir('diccionario') }
-function abrirForja({ idioma, texto }) { idiomaForja.value = idioma; textoForja.value = texto ?? ''; ir('forja') }
 </script>
 
 <template>
@@ -50,10 +46,9 @@ function abrirForja({ idioma, texto }) { idiomaForja.value = idioma; textoForja.
     </div>
     <template v-else>
       <VistaDiccionario v-show="vista === 'diccionario'" :solo-idioma="soloIdioma"
-        @ir-idioma="verIdioma" @forja="abrirForja" @limpiar-solo="soloIdioma = ''" />
+        @ir-idioma="verIdioma" @limpiar-solo="soloIdioma = ''" />
       <VistaLenguas v-if="vista === 'lenguas'" v-model:idioma="idiomaLenguas"
-        @ver-diccionario="verEnDiccionario" @forja="abrirForja" />
-      <VistaForja v-if="vista === 'forja'" v-model:idioma="idiomaForja" :texto-inicial="textoForja" />
+        @ver-diccionario="verEnDiccionario" />
     </template>
   </main>
 

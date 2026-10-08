@@ -7,7 +7,7 @@ import { guardado } from '../lib/util.js'
 import FichaEntrada from './FichaEntrada.vue'
 
 const props = defineProps({ soloIdioma: { type: String, default: '' } })
-const emit = defineEmits(['ir-idioma', 'forja', 'limpiar-solo'])
+const emit = defineEmits(['ir-idioma', 'limpiar-solo'])
 
 const ORDENES = [
   { id: 'lema', nombre: 'Palabra (A–Z)' },
@@ -190,7 +190,7 @@ const hayFiltros = computed(() => q.value || categoriasSel.value.length || etiqu
       <!-- FICHA -->
       <aside v-if="entradaActual" class="ficha-lateral">
         <FichaEntrada :entrada="entradaActual" @cerrar="seleccionada = null" @navegar="id => (seleccionada = id)"
-          @ir-idioma="id => emit('ir-idioma', id)" @forja="p => emit('forja', p)" />
+          @ir-idioma="id => emit('ir-idioma', id)" />
       </aside>
     </div>
   </div>

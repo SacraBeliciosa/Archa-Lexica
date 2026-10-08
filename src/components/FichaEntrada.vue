@@ -6,7 +6,7 @@ import { transcribir } from '../lib/fonetica.js'
 import { pronunciacionDe, copiar } from '../lib/util.js'
 
 const props = defineProps({ entrada: { type: Object, required: true } })
-const emit = defineEmits(['cerrar', 'navegar', 'ir-idioma', 'forja'])
+const emit = defineEmits(['cerrar', 'navegar', 'ir-idioma'])
 
 const idioma = computed(() => MAPA_IDIOMAS[props.entrada.idioma])
 const ipa = computed(() => pronunciacionDe(props.entrada))
@@ -88,9 +88,7 @@ function copiarJson() {
       <div class="chips">
         <span v-for="t in entrada.etiquetas" :key="t" class="chip estatica">#{{ t }}</span>
       </div>
-      <div class="acciones">
-        <button class="boton secundario pequeno" @click="emit('forja', { idioma: idioma.id, texto: entrada.lema })">Abrir en la Forja</button>
-        <button class="boton secundario pequeno" @click="copiarJson">Copiar JSON</button>
+      <div class="acciones">        <button class="boton secundario pequeno" @click="copiarJson">Copiar JSON</button>
         <span class="mono suave">{{ entrada.id }}</span>
       </div>
     </footer>

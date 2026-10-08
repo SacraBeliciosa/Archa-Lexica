@@ -195,9 +195,11 @@ export function transcribir(texto, idioma) {
   }
 }
 
-/** Fonemas -> ortografía (inversa de la tabla). Lo usa el generador. */
-export function aOrtografia(fonemas, fon) {
-  const inversa = new Map()
-  for (const { grafia, ipa } of fon.ortografia ?? []) if (!inversa.has(ipa)) inversa.set(ipa, grafia)
-  return fonemas.map(f => inversa.get(f) ?? f).join('')
+/** "CVC:3" -> { patron:"CVC", peso:3 } ; también admite { patron, peso } */
+export function leerPatrones(lista = []) {
+  return lista.map(p => {
+    if (typeof p === 'object') return { patron: p.patron, peso: Number(p.peso ?? 1) }
+    const [patron, peso] = String(p).split(':')
+    return { patron: patron.trim(), peso: Number(peso ?? 1) || 1 }
+  }).filter(p => p.patron)
 }

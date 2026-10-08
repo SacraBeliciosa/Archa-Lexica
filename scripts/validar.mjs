@@ -5,8 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { CATEGORIAS } from '../src/lib/categorias.js'
-import { aFonemas, tokenizarPatron } from '../src/lib/fonetica.js'
-import { leerPatrones } from '../src/lib/generador.js'
+import { aFonemas, tokenizarPatron, leerPatrones } from '../src/lib/fonetica.js'
 
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const carpeta = path.join(raiz, 'src', 'data', 'idiomas')
@@ -35,7 +34,7 @@ for (const archivo of archivos) {
   if (d.id && archivo !== `${d.id}.json`) av(archivo, `el archivo debería llamarse ${d.id}.json`)
 
   const fon = { consonantes: [], vocales: [], clases: {}, ortografia: [], reglas: [], silaba: {}, ...(d.fonologia ?? {}) }
-  if (!fon.vocales.length) av(archivo, 'fonologia.vocales está vacío: no habrá pronunciación ni generador')
+  if (!fon.vocales.length) av(archivo, 'fonologia.vocales está vacío: no habrá pronunciación')
   if (fon.acento && !ACENTOS.includes(fon.acento)) err(archivo, `acento "${fon.acento}" no válido (${ACENTOS.join(', ')})`)
 
   const inventario = new Set([...fon.consonantes, ...fon.vocales])

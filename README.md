@@ -29,8 +29,6 @@ Requiere Node.js 20 o superior.
   etimología y enlaces entre palabras (también entre lenguas).
 - **Lenguas**: ficha de cada idioma con inventario de sonidos, ortografía, sílabas,
   reglas de sonido, gramática, afijos y estadísticas del léxico.
-- **Forja** (adelanto de la v0.2): pronunciador con traza de reglas, generador de
-  palabras según la fonotaxis y derivador por afijos; todo exporta borradores JSON.
 
 Toda la información vive en `src/data/idiomas/*.json`. Lee **`docs/GUIA.md`** para
 el formato, la notación de reglas y el flujo de trabajo con las plantillas.

@@ -14,7 +14,7 @@ archa-lexica/
 │  └─ idiomas/           Tus guías de diseño, una por idioma (las crea nuevo-idioma)
 └─ src/
    ├─ data/idiomas/      ← AQUÍ VIVEN LOS IDIOMAS (un .json por idioma)
-   ├─ lib/               Motor: fonética, generador, búsqueda
+   ├─ lib/               Motor: fonética, búsqueda
    └─ components/        Pantallas de la app (Vue)
 ```
 
@@ -62,16 +62,3 @@ Ejemplos:
 Si una palabra es irregular, pon su transcripción en `"pronunciacion"` y la app
 usará esa en lugar de calcularla.
 
-## La Forja (generar y derivar)
-
-- **Pronunciador**: escribe cualquier palabra y ves su AFI, sílabas, acento y qué
-  reglas se han aplicado.
-- **Generador**: crea palabras que respetan los patrones de sílaba (`"CV:5"` = el
-  patrón CV con peso 5), los grupos permitidos y las secuencias prohibidas. Con la
-  misma *semilla* obtienes siempre la misma lista. Los fonemas que listes primero
-  en el inventario salen algo más a menudo.
-- **Derivador**: aplica los afijos de `gramatica.afijos` a cualquier palabra del
-  diccionario.
-
-De cualquier resultado puedes copiar un **borrador de entrada en JSON** para
-pegarlo en el archivo del idioma.

@@ -2,10 +2,10 @@
 import { computed } from 'vue'
 import { IDIOMAS, MAPA_IDIOMAS } from '../lib/idiomas.js'
 import { CATEGORIAS } from '../lib/categorias.js'
-import { leerPatrones } from '../lib/generador.js'
+import { leerPatrones } from '../lib/fonetica.js'
 
 const idioma = defineModel('idioma', { type: String })
-const emit = defineEmits(['ver-diccionario', 'forja'])
+const emit = defineEmits(['ver-diccionario'])
 
 const actual = computed(() => MAPA_IDIOMAS[idioma.value] ?? IDIOMAS[0])
 const fon = computed(() => actual.value.fonologia)
@@ -47,9 +47,7 @@ const ortografiaCompleta = computed(() => {
         <p v-if="actual.hablantes" class="suave">{{ actual.hablantes }}</p>
         <p class="desc">{{ actual.descripcion }}</p>
         <div class="acciones">
-          <button class="boton" @click="emit('ver-diccionario', actual.id)">Ver sus {{ actual.entradas.length }} palabras</button>
-          <button class="boton secundario" @click="emit('forja', { idioma: actual.id })">Forjar palabras</button>
-        </div>
+          <button class="boton" @click="emit('ver-diccionario', actual.id)">Ver sus {{ actual.entradas.length }} palabras</button>        </div>
       </header>
 
       <div class="rejilla">
