@@ -1,0 +1,54 @@
+{
+  "id": "nuevo-idioma",
+  "nombre": "Nuevo idioma",
+  "endonimo": "",
+  "familia": "",
+  "estado": "viva",
+  "hablantes": "",
+  "descripcion": "",
+  "escritura": "",
+  "color": "#6b0f1a",
+  "prefijoId": "nu",
+
+  "alfabeto": ["a", "b", "d", "e", "g", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u"],
+
+  "fonologia": {
+    "consonantes": ["p", "t", "k", "b", "d", "g", "m", "n", "s", "l", "ɾ"],
+    "vocales": ["a", "e", "i", "o", "u"],
+    "clases": {
+      "N": ["m", "n"],
+      "L": ["l", "ɾ"]
+    },
+    "ortografia": [
+      { "grafia": "r", "ipa": "ɾ" }
+    ],
+    "reglas": [],
+    "silaba": {
+      "patrones": ["CV:3", "CVC:1", "V:1"],
+      "ataquesPermitidos": [],
+      "prohibidos": []
+    },
+    "acento": "penultima",
+    "notas": ""
+  },
+
+  "gramatica": {
+    "tipologia": "",
+    "notas": [],
+    "afijos": []
+  },
+
+  "entradas": [
+    {
+      "id": "nu-0001",
+      "lema": "",
+      "categoria": "sustantivo",
+      "traduccion": [""],
+      "definicion": "",
+      "ejemplos": [],
+      "etimologia": "",
+      "relacionadas": [],
+      "etiquetas": []
+    }
+  ]
+}

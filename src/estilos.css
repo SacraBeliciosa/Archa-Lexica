@@ -1,0 +1,102 @@
+/* Archa Lexica — paleta Sacra Beliciosa */
+:root {
+  --hueso: #ede6d6;
+  --hueso-claro: #f6f1e6;
+  --hueso-oscuro: #ddd3bd;
+  --carmesi: #a4161a;
+  --granate: #6b0f1a;
+  --onice: #14110f;
+  --onice-suave: #2a2420;
+  --dorado: #b8963e;
+  --dorado-claro: #d9bf7a;
+  --tinta: #2a2420;
+  --tinta-suave: #6a5f55;
+  --linea: #cbbd9e;
+
+  --serif: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  --afi: 'Charis SIL', 'Doulos SIL', 'Gentium Plus', 'Segoe UI', 'Lucida Sans Unicode', sans-serif;
+  --mono: 'Cascadia Code', Consolas, 'Courier New', monospace;
+
+  --radio: 6px;
+  --sombra: 0 1px 2px rgba(20, 17, 15, .08), 0 4px 14px rgba(20, 17, 15, .06);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--hueso);
+  color: var(--tinta);
+  font: 16px/1.5 var(--serif);
+  -webkit-font-smoothing: antialiased;
+}
+#app { min-height: 100%; display: flex; flex-direction: column; }
+
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; margin: 0; letter-spacing: .01em; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--granate); }
+
+.afi { font-family: var(--afi); letter-spacing: .02em; }
+.mono { font-family: var(--mono); font-size: .85em; }
+.suave { color: var(--tinta-suave); }
+.versalitas { font-variant: small-caps; letter-spacing: .06em; }
+
+/* Controles */
+.campo {
+  width: 100%; padding: .55rem .75rem;
+  background: var(--hueso-claro); border: 1px solid var(--linea); border-radius: var(--radio);
+  font-family: var(--sans); font-size: .95rem;
+}
+.campo:focus { outline: 2px solid var(--dorado); outline-offset: -1px; border-color: var(--dorado); }
+select.campo { cursor: pointer; }
+
+.boton {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45rem .9rem; border-radius: var(--radio); cursor: pointer;
+  background: var(--granate); color: var(--hueso-claro); border: 1px solid var(--granate);
+  font-family: var(--sans); font-size: .88rem; font-weight: 500;
+}
+.boton:hover { background: var(--carmesi); border-color: var(--carmesi); }
+.boton.secundario { background: transparent; color: var(--granate); border-color: var(--linea); }
+.boton.secundario:hover { border-color: var(--granate); background: var(--hueso-claro); }
+.boton.pequeno { padding: .25rem .6rem; font-size: .8rem; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .2rem .65rem; border-radius: 999px; cursor: pointer;
+  background: var(--hueso-claro); border: 1px solid var(--linea);
+  font-family: var(--sans); font-size: .8rem; white-space: nowrap;
+}
+.chip:hover { border-color: var(--dorado); }
+.chip.activo { background: var(--onice); color: var(--dorado-claro); border-color: var(--onice); }
+.chip .n { opacity: .6; font-size: .72rem; }
+
+.tarjeta {
+  background: var(--hueso-claro); border: 1px solid var(--linea); border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.etiqueta-campo {
+  display: block; margin: 0 0 .35rem;
+  font-family: var(--sans); font-size: .72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--tinta-suave);
+}
+
+.ornamento { border: 0; height: 1px; margin: 1.25rem 0; background: linear-gradient(90deg, transparent, var(--dorado), transparent); }
+
+table.tabla { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.tabla th, .tabla td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--hueso-oscuro); vertical-align: top; }
+.tabla th { font-family: var(--sans); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--tinta-suave); font-weight: 600; }
+
+.punto { width: .6rem; height: .6rem; border-radius: 50%; display: inline-block; flex: none; }
+
+.aviso { background: #f3e2c4; border-left: 3px solid var(--dorado); padding: .5rem .75rem; font-family: var(--sans); font-size: .85rem; border-radius: 0 var(--radio) var(--radio) 0; }
+
+.toast {
+  position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+  background: var(--onice); color: var(--dorado-claro); padding: .55rem 1rem; border-radius: var(--radio);
+  font-family: var(--sans); font-size: .85rem; box-shadow: var(--sombra); z-index: 50;
+}
+
+::selection { background: var(--dorado-claro); color: var(--onice); }

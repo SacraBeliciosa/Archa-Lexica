@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Idioma de Archa Lexica",
+  "description": "Estructura de un archivo src/data/idiomas/<id>.json. VS Code la usa para autocompletar y avisar de errores.",
+  "type": "object",
+  "required": ["id", "nombre", "entradas"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "Identificador único; debe coincidir con el nombre del archivo." },
+    "nombre": { "type": "string", "description": "Nombre del idioma en español." },
+    "endonimo": { "type": "string", "description": "Cómo llaman los hablantes a su idioma." },
+    "familia": { "type": "string" },
+    "estado": { "type": "string", "examples": ["viva", "muerta", "litúrgica", "criolla", "en desarrollo"] },
+    "hablantes": { "type": "string" },
+    "descripcion": { "type": "string" },
+    "escritura": { "type": "string", "description": "Sistema de escritura nativo y notas de transliteración." },
+    "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Color identificativo en la app." },
+    "prefijoId": { "type": "string", "description": "Prefijo para los id de entrada (ae → ae-0001). Opcional." },
+    "alfabeto": { "type": "array", "items": { "type": "string" }, "description": "Orden alfabético propio. Los dígrafos (ch, th) cuentan como una letra." },
+    "fonologia": {
+      "type": "object",
+      "properties": {
+        "consonantes": { "type": "array", "items": { "type": "string" }, "description": "Inventario consonántico en AFI." },
+        "vocales": { "type": "array", "items": { "type": "string" }, "description": "Inventario vocálico en AFI (aː para largas)." },
+        "clases": { "type": "object", "description": "Grupos con nombre de UNA letra mayúscula (no C ni V).", "additionalProperties": { "type": "array", "items": { "type": "string" } } },
+        "ortografia": {
+          "type": "array",
+          "description": "Letras que no se escriben igual que su símbolo AFI.",
+          "items": { "type": "object", "required": ["grafia", "ipa"], "properties": { "grafia": { "type": "string" }, "ipa": { "type": "string" } } }
+        },
+        "reglas": {
+          "type": "array",
+          "description": "Cambios de sonido, en orden. Notación: de → a / contexto.",
+          "items": {
+            "type": "object", "required": ["de", "a"],
+            "properties": {
+              "de": { "type": "string", "description": "Fonema o conjunto [b,d,g]." },
+              "a": { "type": "string", "description": "Resultado. Conjunto paralelo [p,t,k] o vacío para eliminar." },
+              "contexto": { "type": "string", "description": "_ = posición; # = límite de palabra; V, C, clases o [a,e]. Ej: V_V, _#, #_, _[i,e]." },
+              "nota": { "type": "string" }
+            }
+          }
+        },
+        "silaba": {
+          "type": "object",
+          "properties": {
+            "patrones": { "type": "array", "items": { "type": "string" }, "description": "Formas de sílaba con peso opcional: \"CV:5\", \"CVC:2\"." },
+            "ataquesPermitidos": { "type": "array", "items": { "type": "string" }, "description": "Grupos consonánticos válidos al inicio de sílaba, en AFI: \"pɾ\", \"kl\"." },
+            "prohibidos": { "type": "array", "items": { "type": "string" }, "description": "Secuencias que no pueden aparecer. # = inicio/fin: \"ŋ#\"." }
+          }
+        },
+        "acento": { "enum": ["primera", "penultima", "ultima", "antepenultima", "ninguno"] },
+        "notas": { "type": "string" }
+      }
+    },
+    "gramatica": {
+      "type": "object",
+      "properties": {
+        "tipologia": { "type": "string" },
+        "notas": { "type": "array", "items": { "type": "string" } },
+        "afijos": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["forma", "tipo"],
+            "properties": {
+              "forma": { "type": "string", "description": "\"-iel\" (sufijo) o \"um-\" (prefijo)." },
+              "tipo": { "enum": ["sufijo", "prefijo"] },
+              "significado": { "type": "string" },
+              "aplicaA": { "type": "array", "items": { "type": "string" } },
+              "resultado": { "type": "string", "description": "Categoría resultante o \"mismo\"." },
+              "elision": { "type": "boolean", "description": "Quita la vocal final de la raíz si el sufijo empieza por vocal." },
+              "quitar": { "type": "string", "description": "Terminación a eliminar antes de añadir (p. ej. \"ar\" del infinitivo)." }
+            }
+          }
+        }
+      }
+    },
+    "entradas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "lema", "categoria"],
+        "properties": {
+          "id": { "type": "string", "description": "Único en TODOS los idiomas: ae-0001." },
+          "lema": { "type": "string", "description": "Palabra o frase en el idioma." },
+          "categoria": { "enum": ["sustantivo", "verbo", "adjetivo", "adverbio", "pronombre", "determinante", "numeral", "preposicion", "conjuncion", "interjeccion", "particula", "afijo", "locucion"] },
+          "subcategoria": { "type": "string", "examples": ["personal", "frase hecha", "refrán", "común", "propio"] },
+          "genero": { "type": "string" },
+          "traduccion": { "type": "array", "items": { "type": "string" } },
+          "definicion": { "type": "string" },
+          "pronunciacion": { "type": "string", "description": "Fuerza la transcripción (sin barras) si es irregular." },
+          "formas": { "type": "object", "description": "Formas flexionadas: { \"plural\": \"...\", \"pasado\": \"...\" }.", "additionalProperties": { "type": "string" } },
+          "ejemplos": { "type": "array", "items": { "type": "object", "properties": { "texto": { "type": "string" }, "traduccion": { "type": "string" } } } },
+          "etimologia": { "type": "string" },
+          "relacionadas": { "type": "array", "items": { "type": "string" }, "description": "id de otras entradas (de cualquier idioma)." },
+          "etiquetas": { "type": "array", "items": { "type": "string" } },
+          "notas": { "type": "string" }
+        }
+      }
+    }
+  }
+}

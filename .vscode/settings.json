@@ -1,0 +1,15 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.associations": { "*.lengua.json": "json" },
+  "json.schemas": [
+    {
+      "fileMatch": ["src/data/idiomas/*.json", "docs/plantillas/*.json"],
+      "url": "./docs/idioma.schema.json"
+    }
+  ],
+  "editor.tabSize": 2,
+  "editor.formatOnSave": false,
+  "search.exclude": { "**/node_modules": true, "**/dist": true },
+  "files.watcherExclude": { "**/node_modules/**": true }
+}
